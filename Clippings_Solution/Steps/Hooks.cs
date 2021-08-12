@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Clippings_Solution.Helpers;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,25 @@ namespace Clippings_Solution.Steps
     [Binding]
     public class Hooks
     {
-        private IWebDriver _driver;
+        private Context _context;
+
+        public Hooks(Context context)
+        {
+            _context = context;
+        }
 
         [BeforeScenario]
         public void SetUp()
         {
-            _driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            _driver.Manage().Window.Maximize();
+            _context.Driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            _context.Driver.Manage().Window.Maximize();
         }
 
         [AfterScenario]
         public void TearDown()
         {
-            _driver.Close();
-            _driver.Quit();
-        }
-
-        public IWebDriver GetDriver()
-        {
-            return _driver;
+            _context.Driver.Close();
+            _context.Driver.Quit();
         }
     }
 }

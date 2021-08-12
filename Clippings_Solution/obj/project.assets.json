@@ -6215,19 +6215,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Stanislav\\.nuget\\packages\\": {}
+    "C:\\Users\\stanislav.hadzhiev\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stanislav\\Courses\\Clippings\\Clippings_Solution\\Clippings_Solution\\Clippings_Solution.csproj",
+      "projectUniqueName": "C:\\Users\\stanislav.hadzhiev\\learning\\Clippings\\Clippings_Assignment\\Clippings_Solution\\Clippings_Solution.csproj",
       "projectName": "Clippings_Solution",
-      "projectPath": "C:\\Users\\Stanislav\\Courses\\Clippings\\Clippings_Solution\\Clippings_Solution\\Clippings_Solution.csproj",
-      "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Stanislav\\Courses\\Clippings\\Clippings_Solution\\Clippings_Solution\\obj\\",
+      "projectPath": "C:\\Users\\stanislav.hadzhiev\\learning\\Clippings\\Clippings_Assignment\\Clippings_Solution\\Clippings_Solution.csproj",
+      "packagesPath": "C:\\Users\\stanislav.hadzhiev\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stanislav.hadzhiev\\learning\\Clippings\\Clippings_Assignment\\Clippings_Solution\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\stanislav.hadzhiev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6235,6 +6235,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://repos.ad.bedegaming.com:8081/repository/bede-nuget/": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6309,7 +6310,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }

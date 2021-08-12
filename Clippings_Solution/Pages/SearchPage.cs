@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Clippings_Solution.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Clippings_Solution.Pages
 {
@@ -13,14 +15,6 @@ namespace Clippings_Solution.Pages
         private WebDriverWait wait;
 
         private string pageUrl = "https://clippings.com/search?next=%2F&hierarchicalMenu%5BcategoryList.lvl0%5D=Lighting%2FLight%20Bulbs&page=1";
-        
-        // selectors
-        private By minValueSelector = By.CssSelector(@"#currentPriceInCurrency\.EUR-inputMin");
-        private By maxValueSelector = By.CssSelector(@"#currentPriceInCurrency\.EUR-inputMax");
-        private By valueFilterSubmitButton = By.CssSelector("section[data-title='Price'] button");
-        private By itemPrice = By.CssSelector("div[data-testid='component-price']");
-        private By currencyDropdown = By.CssSelector("input[name='currency']");
-        private By currencyDropdownOptions = By.CssSelector("li[data-value]");
 
         public SearchPage(IWebDriver driver)
         {
@@ -35,43 +29,41 @@ namespace Clippings_Solution.Pages
 
         internal void EnterMinValue(string minValue)
         {
-            IWebElement minValueInput = wait.Until(ExpectedConditions.ElementIsVisible(minValueSelector));
+            IWebElement minValueInput = wait.Until(ExpectedConditions.ElementIsVisible(Selectors.minValueSelector));
             minValueInput.SendKeys(minValue);
         }
 
         internal void EnterMaxValue(string maxValue)
         {
-            IWebElement maxValueInput = wait.Until(ExpectedConditions.ElementIsVisible(maxValueSelector));
+            IWebElement maxValueInput = wait.Until(ExpectedConditions.ElementIsVisible(Selectors.maxValueSelector));
             maxValueInput.SendKeys(maxValue);
         }
 
         internal void SelectSearchButton()
         {
-            _driver.FindElement(valueFilterSubmitButton).Click();
+            _driver.FindElement(Selectors.valueFilterSubmitButton).Click();
         }
 
-        internal void ChangeCurrency(string currency)
+        internal void ChangeCurrency()
         {
-            IWebElement currencyInput = wait.Until(ExpectedConditions.ElementExists(currencyDropdown));
+            ((IJavaScriptExecutor)_driver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+            IWebElement closeButton = wait.Until(ExpectedConditions.ElementToBeClickable(Selectors.closeNotificationButton));
+            closeButton.Click();
+            IWebElement currencyInput = wait.Until(ExpectedConditions.ElementToBeClickable(Selectors.currencyDropdown));
             currencyInput.Click();
-            var elements = wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(currencyDropdownOptions));
-
-            foreach (var option in elements)
-            {
-                if (option.Text.Contains(currency))
-                {
-                    option.Click();
-                }
-            }
+            IWebElement euroOption = wait.Until(ExpectedConditions.ElementToBeClickable(Selectors.currencyDropdownOptionEuro));
+            euroOption.Click();
         }
 
         internal void ResultsAreFilteredByPrice(double minValue, double maxValue)
         {
-            var items = _driver.FindElements(itemPrice);
+            Thread.Sleep(3000);
+            var items = _driver.FindElements(Selectors.itemPrice);
 
             foreach (var item in items)
             {
-                double itemPrice = double.Parse(item.Text);
+                var itemText = item.Text.Replace('€', ' ').Trim();
+                double itemPrice = double.Parse(itemText);
                 Assert.IsTrue(itemPrice >= minValue && itemPrice <= maxValue);
             }
         }

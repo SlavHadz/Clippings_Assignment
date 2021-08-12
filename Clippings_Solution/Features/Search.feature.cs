@@ -104,13 +104,13 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I navigate to the search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
- testRunner.And("I change currency to \"euro\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I change currency to euro", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 6
  testRunner.When("I enter \"100\" in the min value input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.And("I enter \"300\" in the max value input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I enter \"233\" in the max value input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
  testRunner.And("I select the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

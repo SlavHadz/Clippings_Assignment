@@ -1,4 +1,5 @@
-﻿using Clippings_Solution.Pages;
+﻿using Clippings_Solution.Helpers;
+using Clippings_Solution.Pages;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,15 @@ namespace Clippings_Solution.Steps
     [Binding]
     public sealed class SearchSteps
     {
-
-        private readonly ScenarioContext _scenarioContext;
-        IWebDriver _driver;
+        Context _context;
         SearchPage searchPage;
+        int _minValue;
+        int _maxValue;
 
-        public SearchSteps(Hooks hook)
+        public SearchSteps(Context context)
         {
-            _driver = hook.GetDriver();
-            searchPage = new SearchPage(_driver);
+            _context = context;
+            searchPage = new SearchPage(_context.Driver);
         }
 
         [Given(@"I navigate to the search page")]
@@ -28,22 +29,24 @@ namespace Clippings_Solution.Steps
             searchPage.NavigateTo();
         }
 
-        [Given(@"I change currency to ""(.*)""")]
-        public void GivenIChangeCurrencyTo(string currency)
+        [Given(@"I change currency to euro")]
+        public void GivenIChangeCurrencyTo()
         {
-            searchPage.ChangeCurrency(currency);
+            searchPage.ChangeCurrency();
         }
 
         [When(@"I enter ""(.*)"" in the min value input")]
         public void WhenIEnterInTheMinValueInput(string minValue)
         {
             searchPage.EnterMinValue(minValue);
+            _minValue = int.Parse(minValue);
         }
 
         [When(@"I enter ""(.*)"" in the max value input")]
         public void WhenIEnterInTheMaxValueInput(string maxValue)
         {
             searchPage.EnterMaxValue(maxValue);
+            _maxValue = int.Parse(maxValue);
         }
 
         [When(@"I select the search button")]
@@ -55,7 +58,7 @@ namespace Clippings_Solution.Steps
         [Then(@"the page should display filtered results")]
         public void ThenThePageShouldDisplayFilteredResults()
         {
-            searchPage.ResultsAreFilteredByPrice(100, 300);
+            searchPage.ResultsAreFilteredByPrice(_minValue, _maxValue);
         }
 
 
